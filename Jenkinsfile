@@ -31,6 +31,12 @@ pipeline {
                 sh 'mkdir /var/jenkins_home/tomcat-web/shopping'
                 echo 'Copying web application...'             
                 sh 'cp -r shopping/* /var/jenkins_home/tomcat-web/shopping'
+
+                sh '''
+            docker exec tomcat1 mkdir -p /usr/local/tomcat/webapps/shopping
+
+            docker cp shopping/. tomcat1:/usr/local/tomcat/webapps/shopping/
+        '''
             }
         }
     }
